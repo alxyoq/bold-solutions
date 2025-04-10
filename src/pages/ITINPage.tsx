@@ -82,7 +82,6 @@ export default function ITINPage() {
           "📍 Local appointments available",
           "💻 Virtual consultations possible",
           "💼 Bilingual support (English/Spanish)",
-          "📇 Business card in every Uber/Lyft I drive!"
         ],
         closing: "Let's get you on the books—and on the path to building your future in the U.S."
       }
@@ -152,7 +151,6 @@ export default function ITINPage() {
           "📍 Citas locales disponibles",
           "💻 Consultas virtuales posibles",
           "💼 Soporte bilingüe (Inglés/Español)",
-          "📇 ¡Tarjeta de presentación en cada Uber/Lyft que conduzco!"
         ],
         closing: "Pongámoslo en regla—y en el camino para construir su futuro en los EE.UU."
       }
