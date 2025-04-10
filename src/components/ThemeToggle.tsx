@@ -3,46 +3,15 @@ import { useTheme } from '../contexts/ThemeContext';
 export default function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
 
-  // Direct DOM manipulation as a fallback for theme toggling
-  const toggleDOMTheme = () => {
-    const root = document.documentElement;
-    const currentTheme = root.classList.contains('dark') ? 'dark' : 'light';
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-    // Apply the new theme
-    root.classList.remove('dark', 'light');
-    root.classList.add(newTheme);
-
-    // Save the theme to localStorage
-    localStorage.setItem('theme', newTheme);
-
-    console.log(`Toggled theme directly from ${currentTheme} to ${newTheme}`);
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation(); // Prevent bubbling on mobile
+    toggleTheme();
   };
 
   return (
     <button
       type="button"
-      onClick={() => {
-        try {
-          // Try to use context method first
-          console.log('ThemeToggle clicked, current theme:', theme);
-          toggleTheme();
-
-          // As a fallback, directly toggle the DOM theme after a short delay
-          setTimeout(() => {
-            const root = document.documentElement;
-            const hasThemeClass = root.classList.contains('dark') || root.classList.contains('light');
-            if (!hasThemeClass) {
-              console.log('Fallback: directly toggling theme');
-              toggleDOMTheme();
-            }
-          }, 100);
-        } catch (error) {
-          console.error('Error in theme toggle:', error);
-          // If the context method fails, fall back to direct DOM manipulation
-          toggleDOMTheme();
-        }
-      }}
+      onClick={handleClick}
       className="flex items-center justify-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 theme-transition"
       aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
     >
@@ -53,7 +22,7 @@ export default function ThemeToggle() {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-5 h-5 text-yellow-300 theme-transition"
+          className="w-5 h-5 text-yellow-300 theme-transition pointer-events-none"
           aria-hidden="true"
         >
           <path
@@ -69,7 +38,7 @@ export default function ThemeToggle() {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-5 h-5 text-gray-700 theme-transition"
+          className="w-5 h-5 text-gray-700 theme-transition pointer-events-none"
           aria-hidden="true"
         >
           <path

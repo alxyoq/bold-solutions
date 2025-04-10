@@ -5,23 +5,22 @@ import { useTheme } from '../contexts/ThemeContext';
 export default function Hero() {
   const { t, language } = useLanguage();
   const { theme } = useTheme();
+  const isDark = theme === 'dark';
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Add a slight delay to make the animation more noticeable
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, 100);
-
     return () => clearTimeout(timer);
   }, []);
 
   return (
-    <div className={`relative ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'} overflow-hidden theme-transition`}>
+    <div className={`relative ${isDark ? 'bg-gray-900' : 'bg-white'} overflow-hidden theme-transition`}>
       <div className="max-w-7xl mx-auto">
-        <div className={`relative z-10 pb-8 ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'} sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32 theme-transition`}>
+        <div className={`relative z-10 pb-8 ${isDark ? 'bg-gray-900' : 'bg-white'} sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32 theme-transition`}>
           <svg
-            className={`hidden lg:block absolute right-0 inset-y-0 h-full w-48 ${theme === 'dark' ? 'text-gray-900' : 'text-white'} transform translate-x-1/2 theme-transition`}
+            className={`hidden lg:block absolute right-0 inset-y-0 h-full w-48 ${isDark ? 'text-gray-900' : 'text-white'} transform translate-x-1/2 theme-transition pointer-events-none`}
             fill="currentColor"
             viewBox="0 0 100 100"
             preserveAspectRatio="none"
@@ -33,14 +32,14 @@ export default function Hero() {
           <main className="pt-6 mt-8 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 lg:mt-16 lg:px-8 xl:mt-24">
             <div className="sm:text-center lg:text-left">
               <h1
-                className={`text-3xl tracking-tight font-extrabold ${theme === 'dark' ? 'text-white' : 'text-gray-900'} sm:text-4xl md:text-5xl lg:text-6xl break-words theme-transition transition-all duration-1000 ease-in-out transform ${
+                className={`text-3xl tracking-tight font-extrabold ${isDark ? 'text-white' : 'text-gray-900'} sm:text-4xl md:text-5xl lg:text-6xl break-words theme-transition transition-all duration-1000 ease-in-out transform ${
                   isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
                 }`}
               >
                 {t('hero.welcome')}
               </h1>
               <p
-                className={`mt-3 text-base ${theme === 'dark' ? 'text-gray-300' : 'text-gray-500'} sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto lg:mx-0 theme-transition transition-all duration-1000 delay-300 ease-in-out transform ${
+                className={`mt-3 text-base ${isDark ? 'text-gray-300' : 'text-gray-500'} sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto lg:mx-0 theme-transition transition-all duration-1000 delay-300 ease-in-out transform ${
                   isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
                 }`}
               >
@@ -62,7 +61,11 @@ export default function Hero() {
                 <div className="mt-3 sm:mt-0 sm:ml-3 w-full sm:w-auto">
                   <a
                     href="#tax-services"
-                    className={`w-full flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md ${theme === 'dark' ? 'text-gray-900 bg-gray-100 hover:bg-gray-200' : 'text-black bg-gray-100 hover:bg-gray-200'} hover:shadow transform hover:scale-105 transition-all duration-200 ease-in-out md:py-4 md:text-lg md:px-10 theme-transition`}
+                    className={`w-full flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md ${
+                      isDark
+                        ? 'text-white bg-gray-800 hover:bg-gray-700'
+                        : 'text-black bg-gray-100 hover:bg-gray-200'
+                    } hover:shadow transform hover:scale-105 transition-all duration-200 ease-in-out md:py-4 md:text-lg md:px-10 theme-transition`}
                   >
                     {language === 'en' ? 'Learn More' : 'Más Información'}
                   </a>
@@ -72,10 +75,10 @@ export default function Hero() {
           </main>
         </div>
       </div>
-      <div className={`lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100'} theme-transition`}>
+      <div className={`lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 ${isDark ? 'bg-gray-800' : 'bg-gray-100'} theme-transition`}>
         <div className="h-48 w-full sm:h-56 md:h-72 lg:w-full lg:h-full flex items-center justify-center relative overflow-hidden">
           <div
-            className={`absolute inset-0 bg-gradient-to-br ${theme === 'dark' ? 'from-gray-900/30' : 'from-black/10'} to-transparent transition-opacity duration-1000 ${
+            className={`absolute inset-0 pointer-events-none bg-gradient-to-br ${isDark ? 'from-gray-900/30' : 'from-black/10'} to-transparent transition-opacity duration-1000 ${
               isVisible ? 'opacity-100' : 'opacity-0'
             }`}
           />
@@ -84,9 +87,9 @@ export default function Hero() {
             viewBox="0 0 24 24"
             strokeWidth="1"
             stroke="currentColor"
-            className={`w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 ${theme === 'dark' ? 'text-gray-300' : 'text-black'} transition-all duration-1000 transform ${
+            className={`w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 ${isDark ? 'text-gray-300' : 'text-black'} transition-all duration-1000 transform ${
               isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
-            } theme-transition`}
+            } theme-transition pointer-events-none`}
             aria-hidden="true"
           >
             <path
