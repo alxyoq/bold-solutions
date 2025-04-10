@@ -3,14 +3,16 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { useTheme } from '../contexts/ThemeContext';
 
 export default function ContactSection() {
-  const { t } = useLanguage();
   const { theme } = useTheme();
+  const { language } = useLanguage();
+
   const [formState, setFormState] = useState({
     name: '',
     email: '',
     message: '',
     service: 'tax',
   });
+
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -53,7 +55,6 @@ export default function ContactSection() {
     }
   };
 
-  const { language } = useLanguage();
   const text = contactText[language as keyof typeof contactText];
 
   return (
@@ -73,12 +74,14 @@ export default function ContactSection() {
             <div className={`rounded-md ${theme === 'dark' ? 'bg-green-900' : 'bg-green-50'} p-4 text-center`}>
               <div className="flex justify-center">
                 <div className="flex-shrink-0">
-                  <svg className="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <svg className="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                 </div>
                 <div className="ml-3">
-                  <p className={`text-sm font-medium ${theme === 'dark' ? 'text-green-300' : 'text-green-800'}`}>{text.thankYou}</p>
+                  <p className={`text-sm font-medium ${theme === 'dark' ? 'text-green-300' : 'text-green-800'}`}>
+                    {text.thankYou}
+                  </p>
                 </div>
               </div>
             </div>
@@ -89,10 +92,9 @@ export default function ContactSection() {
               data-netlify="true"
               netlify-honeypot="bot-field"
               action="/thank-you"
-              onSubmit={() => setIsSubmitted(true)}
               className="grid grid-cols-1 gap-y-6"
+              onSubmit={() => setIsSubmitted(true)}
             >
-              {/* Netlify hidden fields */}
               <input type="hidden" name="form-name" value="contact" />
               <input type="hidden" name="bot-field" />
 
