@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage';
 import ITINPage from './pages/ITINPage';
 import TaxServicesPage from './pages/TaxServicesPage';
 import WebDevPage from './pages/WebDevPage';
+import ThankYouPage from './pages/ThankYouPage'; // ✅ imported new route
 import Footer from './components/Footer';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
                 <Route path="/itin-services" element={<ITINPage />} />
                 <Route path="/tax-services" element={<TaxServicesPage />} />
                 <Route path="/web-development" element={<WebDevPage />} />
+                <Route path="/thank-you" element={<ThankYouPage />} /> {/* ✅ new route added */}
               </Routes>
             </div>
             <Footer />
